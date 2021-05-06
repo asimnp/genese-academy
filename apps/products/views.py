@@ -1,6 +1,5 @@
 from django.views import generic
-from django.shortcuts import get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from .models import Product
 from .forms import ProductForm
@@ -33,3 +32,8 @@ class ProductUpdate(generic.UpdateView):
 
     def get_success_url(self):
         return reverse('product_detail', kwargs={'pk': self.object.pk})
+
+
+class ProductDelete(generic.DeleteView):
+    model = Product
+    success_url = reverse_lazy('product_list')
