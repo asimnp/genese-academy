@@ -1,6 +1,6 @@
 <h1>Products</h1>
 {% for product in products %}
-    <p><strong>{{ product.name }}</strong></p>
+    <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
     <p>Price: $ {{ product.price }} {% if product.category %} | Category: {{ product.category }} {% endif %}</p>
     {% if not forloop.last %} <hr> {% endif %}
 {% endfor %}
