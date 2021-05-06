@@ -1,4 +1,5 @@
 from django.views import generic
+from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
 from .models import Product
@@ -20,6 +21,15 @@ class ProductDetail(generic.DetailView):
 class ProductCreate(generic.CreateView):
     form_class = ProductForm
     template_name = 'products/product_create.html'
+
+    def get_success_url(self):
+        return reverse('product_detail', kwargs={'pk': self.object.pk})
+
+
+class ProductUpdate(generic.UpdateView):
+    model = Product
+    fields = ['name', 'price', 'category']
+    template_name = 'products/product_update.html'
 
     def get_success_url(self):
         return reverse('product_detail', kwargs={'pk': self.object.pk})
