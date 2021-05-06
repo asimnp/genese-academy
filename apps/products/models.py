@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class DateTimeModel(models.Model):
@@ -19,9 +20,14 @@ class Category(models.Model):
         return self.name
 
 
+def check_product_price_not_negative_or_zero(value):
+    if value < 0 or value == 0:
+        raise ValidationError('Price should not be negative or zero.')
+
+
 class Product(DateTimeModel):
     name = models.CharField(max_length=100)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=5, decimal_places=2, validators=[check_product_price_not_negative_or_zero])
 
     category = models.ForeignKey(Category, models.SET_NULL, blank=True, null=True, related_name='category')
 
