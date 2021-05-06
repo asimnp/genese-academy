@@ -1,4 +1,5 @@
 <h1>Products</h1>
+<p><a href="{% url 'product_create' %}">Create new product</a></p>
 {% for product in products %}
     <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
     <p>Price: $ {{ product.price }} {% if product.category %} | Category: {{ product.category }} {% endif %}</p>
