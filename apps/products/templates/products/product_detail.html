@@ -1,0 +1,4 @@
+<p><a href="{% url 'product_list' %}">All products</a></p>
+<h2>{{ product.name }}</h2>
+<p><strong>Price:</strong> $ {{ product.price }} {% if product.category %} | <strong>Category:</strong> {{ product.category }} {% endif %}</p>
+<p><strong>Created:</strong> {{ product.created }} | <strong>Last updated:</strong> {{ product.updated }}</p>
